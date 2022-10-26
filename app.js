@@ -181,14 +181,7 @@ app.post('/send-message', [
     const number = phoneNumberFormatter(req.body.number);
     const message = req.body.message;
 
-    const isRegisteredNumber = await checkRegisteredNumber(number);
 
-    if (!isRegisteredNumber) {
-        return res.status(422).json({
-            status: false,
-            message: 'The number is not registered'
-        });
-    }
 
     client.sendMessage(number, message).then(response => {
         res.status(200).json({
